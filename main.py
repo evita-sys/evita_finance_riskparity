@@ -7,6 +7,10 @@ if __name__ == "__main__":
     # print(df)
     st.title('Ms. Evita Finance')
     
+    rp_url = 'https://msevitafinance.blog.fc2.com/blog-entry-2.html'
+    # st.write('check out this [link](%s)' % rp_url)
+    st.write('[レイダリオ氏が考える運用手法リスク・パリティとは](%s)' % rp_url)
+    
     # 既設定の銘柄INPUT
     dict_tickers = calc_fn.get_tickers()
     tickers_list = dict_tickers.keys()
@@ -24,4 +28,7 @@ if __name__ == "__main__":
             tkr = [v for k, v in dict_tickers.items() if k in target_tickers]
             df = calc_fn.riskparity(tkr)
             st.write(df)
-            print(df)
+            
+    
+    disclaimer_url = 'https://msevitafinance.blog.fc2.com/blog-entry-1.html'
+    st.write('[免責事項](%s)' % disclaimer_url)
