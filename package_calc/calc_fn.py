@@ -32,11 +32,11 @@ def get_tickers():
 
 # ポートフォリオ全体の標準偏差
 def sigma_P(w,cov):
-    return np.sqrt((w*cov*w.T)[0,0])
+    return np.sqrt((w @ cov @ w.T)[0,0])
 
 # リスク寄与度
 def RC(w,cov):
-    return np.multiply(cov*w.T, w.T)/sigma_P(w,cov)
+    return np.multiply(cov @ w.T, w.T)/sigma_P(w,cov)
 
 # 目的関数
 def objective_function(x, params):
