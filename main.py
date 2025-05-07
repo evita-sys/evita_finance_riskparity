@@ -5,11 +5,13 @@ if __name__ == "__main__":
     # tickers = ['VTI', 'VEA', 'VWO', 'AGG', 'IAU', 'IYR']
     # df = calc_fn.riskparity(tickers)
     # print(df)
-    st.title('Ms. Evita Finance')
+    #st.title('Ms. Evita Finance')
+    st.title('MichibataDeSuKa Test App')
+
     
-    rp_url = 'https://msevitafinance.blog.fc2.com/blog-entry-2.html'
+    # rp_url = 'https://msevitafinance.blog.fc2.com/blog-entry-2.html'
     # st.write('check out this [link](%s)' % rp_url)
-    st.write('[レイダリオ氏が考える運用手法リスク・パリティとは](%s)' % rp_url)
+    # st.write('[レイダリオ氏が考える運用手法リスク・パリティとは](%s)' % rp_url)
     
     # 既設定の銘柄INPUT
     dict_tickers = calc_fn.get_tickers()
@@ -30,5 +32,5 @@ if __name__ == "__main__":
             st.write(df)
             
     
-    disclaimer_url = 'https://msevitafinance.blog.fc2.com/blog-entry-1.html'
-    st.write('[免責事項](%s)' % disclaimer_url)
+    # disclaimer_url = 'https://msevitafinance.blog.fc2.com/blog-entry-1.html'
+    # st.write('[免責事項](%s)' % disclaimer_url)
