@@ -45,7 +45,7 @@ def objective_function(x, params):
     wt = np.asmatrix(x)
     cov = params[0]
 
-    # ポートフォリオ全体標準偏差
+    # ポートフォリオ全体の標準偏差
     sig_p = sigma_P(wt, cov)
 
     # 資産毎のリスク寄与度
@@ -81,21 +81,21 @@ def riskparity(tickers):
     # 共分散行列計算
     V = returns.cov().to_numpy()
 
-    # 1. Ensure covariance matrix is positive semi-definite
+    # 1. Ensure covariance matrix is positive semi-definite and Hermitian
     try:
+        V = (V + V.T) / 2  # Make it symmetric
         L, Q = eigh(V)
         L = np.maximum(L, 0)  # Remove negative eigenvalues
         V = Q @ np.diag(L) @ Q.T
     except Exception as e:
         print(f"Error in making covariance matrix positive semi-definite: {e}")
-        # Handle the error appropriately, e.g., raise an exception, return a default, or log the error
-        raise  # Re-raise the exception to stop execution if necessary
+        raise  # Re-raise to stop execution
 
     # 最適化
     num_assets = len(tickers)
     w0 = [1 / num_assets for i in range(num_assets)]  # ウェイト初期値
     cons = ({'type': 'eq', 'fun': total_weight_constraint},{'type': 'ineq', 'fun': long_only_constraint})
-    res = minimize(objective_function, x0=w0, args=[V], method='SLSQP',constraints=cons, options={'disp': True, 'ftol': 1e-12}) # added constraints
+    res = minimize(objective_function, x0=w0, args=[V], method='SLSQP',constraints=cons, options={'disp': True, 'ftol': 1e-12})
 
     w_final = np.asmatrix(res.x)
     rc_final = RC(np.matrix(w_final), V)
