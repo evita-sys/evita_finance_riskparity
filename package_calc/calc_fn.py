@@ -45,7 +45,7 @@ def objective_function(x, params):
     wt = np.asmatrix(x)
     cov = params[0]
 
-    # ポートフォリオ全体の標準偏差
+    # ポートフォリオ全体標準偏差
     sig_p = sigma_P(wt, cov)
 
     # 資産毎のリスク寄与度
