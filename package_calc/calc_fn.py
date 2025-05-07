@@ -1,5 +1,5 @@
 # py -m pip install yfinance
-# py -m pip install scipy 
+# py -m pip install scipy
 import yfinance as yf
 import numpy as np
 import pandas as pd
@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 # 銘柄設定
 def get_tickers():
     dict_tickers = {
-        'VTI':'VTI', 
+        'VTI':'VTI',
         'VEA':'VEA',
         'VWO':'VWO',
         'AGG':'AGG',
@@ -72,6 +72,8 @@ def riskparity(tickers):
     start_date = (datetime.now() - timedelta(1300)).strftime('%Y-%m-%d')
 
     data = yf.download(tickers, start = start_date, end = end_date)['Adj Close']
+    # すべてNaNの列を削除
+    data = data.dropna(axis=1, how='all')
     returns = data.pct_change().dropna()
 
     # 共分散行列計算
